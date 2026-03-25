@@ -1,38 +1,72 @@
 const path = require('path')
 const fs = require('fs')
 
+const APPLE_SIGN_IDENTITY = process.env.APPLE_SIGN_IDENTITY
+const APPLE_API_KEY_PATH = process.env.APPLE_API_KEY_PATH
+const APPLE_API_KEY_ID = process.env.APPLE_API_KEY_ID
+const APPLE_API_ISSUER = process.env.APPLE_API_ISSUER
+const WINDOWS_MANUFACTURER = process.env.WINDOWS_MANUFACTURER || 'Oyster Contributors'
+
+function recreateGitkeepFiles(srcBase, destBase) {
+  let entries
+  try { entries = fs.readdirSync(srcBase, { withFileTypes: true }) } catch { return }
+  for (const entry of entries) {
+    const srcPath = path.join(srcBase, entry.name)
+    const destPath = path.join(destBase, entry.name)
+    if (entry.isDirectory()) {
+      recreateGitkeepFiles(srcPath, destPath)
+    } else if (entry.name === '.gitkeep') {
+      try {
+        fs.mkdirSync(destBase, { recursive: true })
+        fs.writeFileSync(destPath, '')
+      } catch {}
+    }
+  }
+}
+
 module.exports = {
   packagerConfig: {
-    name: 'Logseq',
+    name: 'Oyster',
     icon: './icons/logseq_big_sur.icns',
     buildVersion: "88",
-    appBundleId: "com.logseq.logseq",
-    protocols: [
-      {
-        "protocol": "logseq",
-        "name": "logseq",
-        "schemes": "logseq"
+    appBundleId: "com.firehazard.oyster",
+    afterCopy: [
+      (buildPath, _electronVersion, _platform, _arch, callback) => {
+        // electron-packager excludes .gitkeep files during copy, but codesign
+        // records all files in the signature. Recreate them so the seal is valid.
+        recreateGitkeepFiles(
+          path.join(__dirname, 'node_modules'),
+          path.join(buildPath, 'node_modules')
+        )
+        callback()
       }
     ],
-    osxSign: {
-      identity: 'Developer ID Application: Logseq Inc. (K378MFWK59)',
+    protocols: [
+      {
+        "protocol": "oyster",
+        "name": "oyster",
+        "schemes": "oyster"
+      }
+    ],
+    osxSign: APPLE_SIGN_IDENTITY ? {
+      identity: APPLE_SIGN_IDENTITY,
       'hardened-runtime': true,
       entitlements: 'entitlements.plist',
       'entitlements-inherit': 'entitlements.plist',
       'signature-flags': 'library'
-    },
-    osxNotarize: process.env['APPLE_ID'] ? {
+    } : undefined,
+    osxNotarize: APPLE_API_KEY_PATH && APPLE_API_KEY_ID && APPLE_API_ISSUER ? {
       tool: 'notarytool',
-      appleId: process.env['APPLE_ID'],
-      appleIdPassword: process.env['APPLE_ID_PASSWORD'],
-      teamId: process.env['APPLE_TEAM_ID']
+      appleApiKey: APPLE_API_KEY_PATH,
+      appleApiKeyId: APPLE_API_KEY_ID,
+      appleApiIssuer: APPLE_API_ISSUER
     } : undefined,
   },
   makers: [
     {
       'name': '@electron-forge/maker-squirrel',
       'config': {
-        'name': 'Logseq',
+        'name': 'Oyster',
         'setupIcon': './icons/logseq.ico',
         'loadingGif': './icons/installing.gif',
         'certificateFile': process.env.CODE_SIGN_CERTIFICATE_FILE,
@@ -43,11 +77,11 @@ module.exports = {
     {
       'name': '@electron-forge/maker-wix',
       'config': {
-        name: 'Logseq',
+        name: 'Oyster',
         icon: path.join(__dirname, './icons/logseq.ico'),
         language: 1033,
-        manufacturer: 'Logseq',
-        appUserModelId: 'com.logseq.logseq',
+        manufacturer: WINDOWS_MANUFACTURER,
+        appUserModelId: 'com.firehazard.oyster',
         upgradeCode: "3778eb84-a0ce-4109-9120-5d4315e0d7de",
         ui: {
           enabled: false,
@@ -76,7 +110,7 @@ module.exports = {
       config: {
         format: 'ULFO',
         icon: './icons/logseq_big_sur.icns',
-        name: 'Logseq'
+        name: 'Oyster'
       }
     },
     {
@@ -88,21 +122,8 @@ module.exports = {
       name: 'electron-forge-maker-appimage',
       platforms: ['linux'],
       config: {
-        mimeType: ["x-scheme-handler/logseq"]
+        mimeType: ["x-scheme-handler/oyster"]
       }
     }
   ],
-
-  publishers: [
-    {
-      name: '@electron-forge/publisher-github',
-      config: {
-        repository: {
-          owner: 'logseq',
-          name: 'logseq'
-        },
-        prerelease: true
-      }
-    }
-  ]
 }

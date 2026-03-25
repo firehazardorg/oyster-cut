@@ -20,7 +20,7 @@
         <key>CFBundleDevelopmentRegion</key>
         <string>en</string>
         <key>CFBundleDisplayName</key>
-        <string>Logseq</string>
+        <string>Oyster</string>
         <key>CFBundleExecutable</key>
         <string>$(EXECUTABLE_NAME)</string>
         <key>CFBundleGetInfoString</key>
@@ -41,15 +41,15 @@
                 <key>CFBundleTypeRole</key>
                 <string>Viewer</string>
                 <key>CFBundleURLName</key>
-                <string>com.logseq.logseq</string>
+                <string>com.firehazard.oyster</string>
                 <key>CFBundleURLSchemes</key>
                 <array>
-                    <string>logseq</string>
+                    <string>oyster</string>
                 </array>
             </dict>
         </array>
         <key>CFBundleVersion</key>
-        <string>$(CURRENT_PROJECT_VERSION)</string>
+        <string>2</string>
         <key>ITSAppUsesNonExemptEncryption</key>
         <false/>
         <key>LSApplicationCategoryType</key>
@@ -83,20 +83,20 @@
         <string>We need access to speech recognition to convert your voice to text.</string>
         <key>NSUbiquitousContainers</key>
         <dict>
-            <key>iCloud.com.logseq.logseq</key>
+            <key>iCloud.com.firehazard.oyster</key>
             <dict>
                 <key>NSUbiquitousContainerIsDocumentScopePublic</key>
                 <true/>
                 <key>NSUbiquitousContainerName</key>
-                <string>Logseq</string>
+                <string>Oyster</string>
                 <key>NSUbiquitousContainerSupportedFolderLevels</key>
                 <string>ANY</string>
             </dict>
         </dict>
         <key>NSUserActivityTypes</key>
         <array>
-            <string>com.logseq.quickadd</string>
-            <string>com.logseq.audio</string>
+            <string>com.firehazard.oyster.quickadd</string>
+            <string>com.firehazard.oyster.audio</string>
         </array>
         <key>UIApplicationShortcutItems</key>
         <array>
@@ -106,7 +106,7 @@
                 <key>UIApplicationShortcutItemTitle</key>
                 <string>Voice</string>
                 <key>UIApplicationShortcutItemType</key>
-                <string>logseq.voice</string>
+                <string>oyster.voice</string>
             </dict>
             <dict>
                 <key>UIApplicationShortcutItemIconSymbolName</key>
@@ -114,7 +114,7 @@
                 <key>UIApplicationShortcutItemTitle</key>
                 <string>Quick Add</string>
                 <key>UIApplicationShortcutItemType</key>
-                <string>logseq.quickadd</string>
+                <string>oyster.quickadd</string>
             </dict>
         </array>
         <key>UIBackgroundModes</key>

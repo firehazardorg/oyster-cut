@@ -1,0 +1,24 @@
+version: 1
+updated_at: "2026-03-24"
+upstreams:
+  - name: logseq
+    remote_name: upstream-logseq
+    remote_url: https://github.com/logseq/logseq.git
+    default_branch: master
+    mirror_branch: upstream/logseq
+    integration_method: merge
+    subtree_prefix: .
+    last_synced_sha: null
+    last_synced_at: null
+    notes: Primary upstream mirror for Oyster.
+
+  - name: huncho
+    remote_name: upstream-huncho
+    remote_url: TBD_REPLACE_WITH_HUNCHO_REMOTE_URL
+    default_branch: main
+    mirror_branch: upstream/huncho
+    integration_method: subtree-merge
+    subtree_prefix: packages/huncho
+    last_synced_sha: null
+    last_synced_at: null
+    notes: Set remote_url/default_branch before first huncho sync.

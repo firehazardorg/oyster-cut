@@ -6,4 +6,7 @@ xcuserdata
 
 # Cordova plugins for Capacitor
 capacitor-cordova-ios-plugins
-
+AuthKey_*_ASC.p8
+*.ipa
+*.dSYM.zip
+App/fastlane/report.xml

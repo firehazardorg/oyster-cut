@@ -1,34 +1,34 @@
 # This file contains the fastlane.tools configuration
 # You can find the documentation at https://docs.fastlane.tools
-#
-# For a list of all available actions, check out
-#
-#     https://docs.fastlane.tools/actions
-#
-# For a list of all available plugins, check out
-#
-#     https://docs.fastlane.tools/plugins/available-plugins
-#
-
-# Uncomment the line if you want fastlane to automatically update itself
-# update_fastlane
 
 default_platform(:ios)
 
+def oyster_app_identifiers
+  ENV.fetch("IOS_APP_IDENTIFIER_LIST",
+            "com.example.oyster,com.example.oyster.ShareViewController,com.example.oyster.shortcuts")
+     .split(",")
+     .map(&:strip)
+end
+
+def asc_key_args
+  {
+    key_id: ENV.fetch("APP_STORE_CONNECT_API_KEY_KEY_ID", "ASC_KEY_ID"),
+    issuer_id: ENV.fetch("APP_STORE_CONNECT_API_KEY_ISSUER_ID", "ASC_ISSUER_ID"),
+    key_filepath: ENV.fetch("APP_STORE_CONNECT_API_KEY_FILEPATH", "../AuthKey_PLACEHOLDER.p8"),
+    duration: 1200,
+    in_house: false
+  }
+end
+
 platform :ios do
-  desc "Push a new beta build to TestFlight"
+  desc "Build and upload a new beta to TestFlight"
   lane :beta do
-    setup_ci
+    app_store_connect_api_key(**asc_key_args)
 
-    app_store_connect_api_key(
-      key_id: ENV["APP_STORE_CONNECT_API_KEY_KEY_ID"],
-      issuer_id: ENV["APP_STORE_CONNECT_API_KEY_ISSUER_ID"],
-      key_filepath: ENV["APP_STORE_CONNECT_API_KEY_KEY_FILEPATH"],
-    )
-
-    sync_code_signing(
-      type: "appstore",
-      readonly: false
+    match(type: "appstore",
+      git_url: ENV.fetch("MATCH_GIT_URL", "git@github.com:example/fastlane-certificates.git"),
+      app_identifier: oyster_app_identifiers,
+      team_id: ENV.fetch("APPLE_TEAM_ID", "TEAMID1234")
     )
 
     version_number = get_version_number(
@@ -41,27 +41,32 @@ platform :ios do
       initial_build_number: 1,
     )
 
-    build_number = increment_build_number(
+    increment_build_number(
       xcodeproj: "App.xcodeproj",
       build_number: latest_build_number + 1,
     )
 
-    # Ref: https://docs.fastlane.tools/advanced/fastlane/#directory-behavior
-    sh("../../../scripts/patch-xcode-project.sh")
+    sh("../../../scripts/patch-xcode-project-oyster.sh")
 
     build_app(
       workspace: "App.xcworkspace",
       destination: "generic/platform=iOS",
       scheme: "Logseq",
       configuration: "Release",
-      xcargs: "-allowProvisioningUpdates"
+      export_method: "app-store",
+      export_team_id: ENV.fetch("APPLE_TEAM_ID", "TEAMID1234")
     )
 
     upload_to_testflight(
       skip_submission: true,
       skip_waiting_for_build_processing: true,
     )
+  end
 
-    slack(message: "App Build (#{build_number}) successfully uploaded to TestFlight 🎉!")
+  desc "Upload the latest build to TestFlight (no build step)"
+  lane :upload do
+    app_store_connect_api_key(**asc_key_args)
+
+    pilot
   end
 end

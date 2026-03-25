@@ -1,0 +1,13 @@
+Oyster includes and derives from AGPL-licensed software, including Logseq and
+Huncho, and preserves upstream attribution and license obligations.
+
+Upstream projects:
+- Logseq: https://github.com/logseq/logseq
+- Huncho: remote to be configured in UPSTREAMS.yaml
+
+This repository is distributed under the GNU Affero General Public License
+Version 3 (AGPL-3.0). See LICENSE.md for full license text.
+
+For source correspondence and deployment/source linkage expectations, see:
+- ATTRIBUTION.md
+- docs/source-offer.md

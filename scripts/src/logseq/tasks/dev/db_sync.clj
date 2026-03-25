@@ -8,7 +8,7 @@
     :cmd "clojure -M:cljs watch db-sync"}
    {:name "wrangler-dev"
     :dir "deps/db-sync/worker"
-    :cmd "wrangler dev"}
+    :cmd "npx wrangler dev"}
    {:name "yarn-watch"
     :dir "."
     :cmd "ENABLE_DB_SYNC_LOCAL=true yarn watch"}])

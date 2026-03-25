@@ -46,6 +46,7 @@
                           frontend.config/ENABLE-RTC-SYNC-PRODUCTION #shadow/env ["ENABLE_RTC_SYNC_PRODUCTION" :as :bool :default true]
 
                           frontend.config/ENABLE-DB-SYNC-LOCAL #shadow/env ["ENABLE_DB_SYNC_LOCAL" :as :bool :default false]
+                          frontend.config/ENABLE-DB-SYNC-LOCALHOST #shadow/env ["ENABLE_DB_SYNC_LOCALHOST" :as :bool :default false]
                           frontend.config/REVISION #shadow/env ["LOGSEQ_REVISION" :default "dev"]} ;; set by git-revision-hook
 
         :devtools {:before-load frontend.core/stop          ;; before live-reloading any code call this function
@@ -150,6 +151,7 @@
             frontend.config/ENABLE-RTC-SYNC-PRODUCTION #shadow/env ["ENABLE_RTC_SYNC_PRODUCTION" :as :bool :default true]
 
             frontend.config/ENABLE-DB-SYNC-LOCAL #shadow/env ["ENABLE_DB_SYNC_LOCAL" :as :bool :default false]
+            frontend.config/ENABLE-DB-SYNC-LOCALHOST #shadow/env ["ENABLE_DB_SYNC_LOCALHOST" :as :bool :default false]
             frontend.config/REVISION #shadow/env ["LOGSEQ_REVISION" :default "dev"]}
 
            :devtools {:before-load mobile.core/stop!          ;; before live-reloading any code call this function
@@ -225,4 +227,10 @@
                                              :redef false}}
                :devtools {:before-load frontend.core/stop
                           :after-load frontend.core/start
-                          :preloads [devtools.preload]}}}}
+                          :preloads [devtools.preload]}}
+
+  :stories-dev {:target :npm-module
+                :entries [logseq.shui.storybook]
+                :output-dir "packages/ui/.storybook/cljs"
+                :devtools {:enabled true}
+                :compiler-options {:optimizations :simple}}}}
