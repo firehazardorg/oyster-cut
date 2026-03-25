@@ -104,7 +104,7 @@ fi
 # Deploy
 echo "Deploying $WORKER..."
 cd "$WORKER_DIR"
-npx wrangler deploy --config wrangler.local.toml "${DEPLOY_ARGS[@]}"
+npx wrangler deploy --config wrangler.local.toml ${DEPLOY_ARGS[@]+"${DEPLOY_ARGS[@]}"}
 
 echo "Deploy complete. Cleaning up local config."
 rm -f "$LOCAL_CONFIG"
