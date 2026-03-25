@@ -112,10 +112,8 @@ adb install android/app/build/outputs/apk/debug/app-debug.apk
 
 ## Artifact Upload
 
-APK uploaded to R2 bucket `oyster-releases`:
-
-```
-oyster-releases/android/app-debug-2026-03-05.apk
+```bash
+npx wrangler r2 object put oyster-releases/android/<version>/oyster.apk --file=android/app/build/outputs/apk/debug/app-debug.apk --remote
 ```
 
 ---

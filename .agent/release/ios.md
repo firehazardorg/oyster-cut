@@ -51,7 +51,7 @@ Created app named **Oyster** with bundle ID `com.firehazard.oyster` at [appstore
 cd ios/App && fastlane match appstore
 ```
 
-This cloned your fastlane certificates repo, reused the existing distribution certificate, created 3 new provisioning profiles and pushed them encrypted to the certs repo:
+This cloned `firehazardorg/fastlane-certificates`, reused the existing distribution certificate (Apple Distribution: Shaunak Deshpande, valid Jul 2025–Jul 2026), created 3 new provisioning profiles and pushed them encrypted to the certs repo:
 
 - `match AppStore com.firehazard.oyster`
 - `match AppStore com.firehazard.oyster.ShareViewController`
@@ -108,7 +108,7 @@ git push private master --force-with-lease
 | `ios/App/ShareViewController/ShareViewController.entitlements` | App group → `group.com.firehazard.oyster` |
 | `ios/App/shortcutsExtension.entitlements` | App group → `group.com.firehazard.oyster` |
 | `ios/App/fastlane/Appfile` | Bundle ID, Apple ID, team ID → oyster values |
-| `ios/App/fastlane/Matchfile` | Certs repo → `<your-fastlane-certs-repo>`; all 3 oyster bundle IDs |
+| `ios/App/fastlane/Matchfile` | Certs repo → `firehazardorg/fastlane-certificates`; all 3 oyster bundle IDs |
 | `ios/App/fastlane/Fastfile` | ASC API key `<ASC_API_KEY_ID>`; calls `patch-xcode-project-oyster.sh`; uploads to TestFlight |
 
 ### New files added
@@ -129,6 +129,7 @@ git push private master --force-with-lease
 # 1. Build web assets + cap sync (compiles ClojureScript, syncs to Xcode project)
 ENABLE_DB_SYNC_LOCAL=true ENABLE_FILE_SYNC_PRODUCTION=true yarn sync-ios-release
 
+set -a; source .env.open-source.local; set +a 
 # 2. Build and upload to TestFlight
 cd ios/App && fastlane beta
 ```
@@ -152,7 +153,7 @@ cd ios/App && fastlane upload
 ## Notes
 
 - `AuthKey_<ASC_API_KEY_ID>_ASC.p8` is at `ios/AuthKey_<ASC_API_KEY_ID>_ASC.p8` — never commit this file.
-- The certs repo (configured in Matchfile) stores oyster provisioning profiles.
+- The certs repo `firehazardorg/fastlane-certificates` already has SOS app certs — oyster profiles sit alongside without affecting SOS.
 - The Xcode scheme is still named `Logseq` — only the display name in `Info.plist` matters for what users see.
 - `aps-environment: development` in `App.entitlements` is fine for App Store/TestFlight builds — Xcode overrides it with `production` during archive.
 - If adding a new capability to an identifier later, always run `fastlane match appstore --force` after enabling it in the portal to regenerate the provisioning profile.

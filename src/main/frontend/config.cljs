@@ -57,14 +57,14 @@
   (if db-sync-local?
     (if db-sync-localhost?
       "ws://localhost:8787/sync/%s"
-      "wss://sync-dev.example.com/sync/%s")
+      "wss://logseq-sync.fire00hazard.workers.dev/sync/%s")
     "wss://logseq-sync-prod.logseq.workers.dev/sync/%s"))
 
 (defonce db-sync-http-base
   (if db-sync-local?
     (if db-sync-localhost?
       "http://localhost:8787"
-      "https://sync-dev.example.com")
+      "https://logseq-sync.fire00hazard.workers.dev")
     "https://logseq-sync-prod.logseq.workers.dev"))
 
 ;; Feature flags

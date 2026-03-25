@@ -70,9 +70,11 @@ deps/shui/.clj-kondo
 deps/publish/worker/.wrangler
 deps/publish/worker/dist
 deps/publish/worker/.env*
+deps/publish/worker/wrangler.local.toml
 deps/db-sync/worker/.wrangler
 deps/db-sync/worker/dist
 deps/db-sync/worker/.env*
+deps/db-sync/worker/wrangler.local.toml
 deps/db-sync/worker/.localflare
 .env.open-source.local
 

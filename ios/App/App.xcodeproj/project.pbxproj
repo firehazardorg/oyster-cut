@@ -712,7 +712,7 @@
 				<key>DEVELOPMENT_TEAM</key>
 				<string></string>
 				<key>DEVELOPMENT_TEAM[sdk=iphoneos*]</key>
-				<string>TEAMID1234</string>
+				<string>LR9F42Y4CJ</string>
 				<key>ENABLE_BITCODE</key>
 				<string>NO</string>
 				<key>INFOPLIST_FILE</key>
@@ -779,7 +779,7 @@
 				<key>DEVELOPMENT_TEAM</key>
 				<string></string>
 				<key>DEVELOPMENT_TEAM[sdk=iphoneos*]</key>
-				<string>TEAMID1234</string>
+				<string>LR9F42Y4CJ</string>
 				<key>ENABLE_BITCODE</key>
 				<string>NO</string>
 				<key>INFOPLIST_FILE</key>
@@ -1105,7 +1105,7 @@
 				<key>DEVELOPMENT_TEAM</key>
 				<string></string>
 				<key>DEVELOPMENT_TEAM[sdk=iphoneos*]</key>
-				<string>TEAMID1234</string>
+				<string>LR9F42Y4CJ</string>
 				<key>GENERATE_INFOPLIST_FILE</key>
 				<string>YES</string>
 				<key>INFOPLIST_FILE</key>
@@ -1171,7 +1171,7 @@
 				<key>DEVELOPMENT_TEAM</key>
 				<string></string>
 				<key>DEVELOPMENT_TEAM[sdk=iphoneos*]</key>
-				<string>TEAMID1234</string>
+				<string>LR9F42Y4CJ</string>
 				<key>GENERATE_INFOPLIST_FILE</key>
 				<string>YES</string>
 				<key>INFOPLIST_FILE</key>
@@ -1803,7 +1803,7 @@ echo "SUCCESS" &gt; "${SCRIPT_OUTPUT_FILE_0}"
 				<key>DEVELOPMENT_TEAM</key>
 				<string></string>
 				<key>DEVELOPMENT_TEAM[sdk=iphoneos*]</key>
-				<string>TEAMID1234</string>
+				<string>LR9F42Y4CJ</string>
 				<key>ENABLE_USER_SCRIPT_SANDBOXING</key>
 				<string>YES</string>
 				<key>GCC_C_LANGUAGE_STANDARD</key>
