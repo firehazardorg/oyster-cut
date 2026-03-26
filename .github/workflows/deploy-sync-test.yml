@@ -6,7 +6,7 @@ on:
       branch:
         description: "Git branch to build & deploy"
         required: true
-        default: "master"
+        default: "main"
 
 env:
   CLOJURE_VERSION: "1.11.1.1413"

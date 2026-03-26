@@ -3,7 +3,7 @@ name: logseq/db CI
 on:
   # Path filters ensure jobs only kick off if a change is made to db
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - 'deps/db/**'
       - '.github/workflows/deps-db.yml'
@@ -11,7 +11,7 @@ on:
       # Deps that logseq/db depends on should trigger this workflow
       - 'deps/common/**'
   pull_request:
-    branches: [master]
+    branches: [main]
     paths:
       - 'deps/db/**'
       - '.github/workflows/deps-db.yml'

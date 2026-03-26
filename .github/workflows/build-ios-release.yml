@@ -8,7 +8,7 @@ on:
       git-ref:
         description: "Release Git Ref (Which branch or tag to build?)"
         required: true
-        default: "master"
+        default: "main"
 
 env:
   CLOJURE_VERSION: '1.11.1.1413'

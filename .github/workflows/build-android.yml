@@ -16,9 +16,9 @@ on:
           - non-release
         default: "non-release"
       git-ref:
-        description: "Build from Git Ref(master)"
+        description: "Build from Git Ref(main)"
         required: true
-        default: "master"
+        default: "main"
       enable-file-sync-production:
         description: 'File sync production mode'
         type: boolean

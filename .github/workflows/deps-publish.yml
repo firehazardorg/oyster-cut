@@ -4,7 +4,7 @@ on:
   # Path filters ensure jobs only kick off if a change is made to publish or
   # its local dependencies
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - 'deps/publish/**'
       - '.github/workflows/deps-publish.yml'
@@ -14,7 +14,7 @@ on:
       - 'deps/db/**'
       - 'deps/common/**'
   pull_request:
-    branches: [master]
+    branches: [main]
     paths:
       - 'deps/publish/**'
       - '.github/workflows/deps-publish.yml'

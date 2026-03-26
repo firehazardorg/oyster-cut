@@ -4,7 +4,7 @@ on:
   # Path filters ensure jobs only kick off if a change is made to cli or
   # its local dependencies
   push:
-    branches: [master]
+    branches: [main]
     paths:
       - 'deps/cli/**'
       - '.github/workflows/deps-cli.yml'
@@ -15,7 +15,7 @@ on:
       - 'deps/db/**'
       - 'deps/common/**'
   pull_request:
-    branches: [master]
+    branches: [main]
     paths:
       - 'deps/cli/**'
       - '.github/workflows/deps-cli.yml'
@@ -30,7 +30,7 @@ on:
       git-ref:
         description: "Release Git Ref (Which branch to build?)"
         required: true
-        default: "master"
+        default: "main"
       release-tag:
         type: choice
         description: "Npm Release Tag (Use 'latest' for a stable release)"
